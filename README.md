@@ -7,6 +7,9 @@ Android debloater with ADB automation
 
 `adbloater` is a simple command line tool that automates package removal with `adb`.
 
+The  general process of removing bloatware is described [here](https://www.droidwin.com/remove-uninstall-bloatware-apps-from-android-via-adb-commands)
+
+
 
 ## Installation
 
@@ -32,3 +35,4 @@ For list of commands see
 1. create virtual environment `make venv`
 2. activate `source venv/bin/activate`
 3. install in editable mode `make install`
+
