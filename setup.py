@@ -33,7 +33,7 @@ setup(
     description="Android debloater with ADB automation",
     entry_points={
         "console_scripts": [
-            "adbloater=adbloater.adbloater:main",
+            "adbloater=adbloater.adbloater:cli",
         ],
     },
     install_requires=requirements,
