@@ -91,7 +91,7 @@ def get_packages(save):
 @click.command()
 @click.argument("filename")
 def uninstall(filename):
-    """uninstall marked packages in provided"""
+    """uninstall marked packages from file"""
 
     packages = get_package_list(filename)
     print("Uninstalling packages:")
@@ -106,7 +106,7 @@ def uninstall(filename):
 @click.command()
 @click.argument("filename")
 def restore(filename):
-    """put back packages marked packages in packages.txt"""
+    """put back packages from file"""
 
     packages = get_package_list(filename)
     print("Restoring packages:")

@@ -73,7 +73,6 @@ com.dsi.ant.service.socket
 com.dsi.ant.sample.acquirechannels
 com.dsi.ant.server
 com.samsung.android.hmt.vrsvc
-com.android.chrome
 com.google.android.tts
 com.samsung.android.samsungpass
 com.samsung.android.scloud
@@ -132,3 +131,4 @@ com.samsung.android.allshare.servicefileshare
 com.samsung.android.fmm
 com.samsung.android.sdk.professionalaudio.utility.jammonitor
 com.samsung.android.fast
+com.google.android.youtube
