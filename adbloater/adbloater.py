@@ -53,7 +53,7 @@ def restore_pkg(name: str):
     shell_cmd("adb shell cmd package install-existing " + name)
 
 
-def get_packages_to_remove(filename: str, symbol="#") -> list:
+def get_packages_from_file(filename: str, symbol="#") -> list:
     """read commented out lines to get packages"""
     with open(filename, "r", encoding="utf-8") as fid:
         lines = fid.readlines()
@@ -67,7 +67,7 @@ def get_packages_to_remove(filename: str, symbol="#") -> list:
     return packages
 
 
-@click.command()
+@click.command("list")
 @click.option("--save", help="save packages to packages.txt", is_flag=True)
 def get_packages(save):
     """get list of packages from device"""
@@ -82,7 +82,7 @@ def get_packages(save):
 def uninstall():
     """uninstall marked packages in packages.txt"""
 
-    packages = get_packages_to_remove("packages.txt")
+    packages = get_packages_from_file("packages.txt")
     print("Uninstalling packages:")
     for pkg in packages:
         print(pkg)
@@ -96,7 +96,7 @@ def uninstall():
 def restore():
     """put back packages marked packages in packages.txt"""
 
-    packages = get_packages_to_remove("packages.txt")
+    packages = get_packages_from_file("packages.txt")
     print("Installing packages:")
     for pkg in packages:
         print(pkg)
