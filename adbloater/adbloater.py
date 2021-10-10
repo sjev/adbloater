@@ -53,7 +53,7 @@ def restore_pkg(name: str):
     shell_cmd("adb shell cmd package install-existing " + name)
 
 
-def get_packages_from_file(filename: str, symbol="#") -> list:
+def get_marked_packages(filename: str = "packages.txt", symbol="#") -> list:
     """read commented out lines to get packages"""
     with open(filename, "r", encoding="utf-8") as fid:
         lines = fid.readlines()
@@ -64,6 +64,16 @@ def get_packages_from_file(filename: str, symbol="#") -> list:
         if line[0] == symbol:
             packages.append(line.split(":")[1].strip())
 
+    return packages
+
+
+def get_package_list(filename: str) -> list:
+    """get packages from file"""
+
+    with open(filename, "r", encoding="utf-8") as fid:
+        lines = fid.readlines()
+
+    packages = [line.strip() for line in lines]
     return packages
 
 
@@ -79,10 +89,11 @@ def get_packages(save):
 
 
 @click.command()
-def uninstall():
-    """uninstall marked packages in packages.txt"""
+@click.argument("filename")
+def uninstall(filename):
+    """uninstall marked packages in provided"""
 
-    packages = get_packages_from_file("packages.txt")
+    packages = get_package_list(filename)
     print("Uninstalling packages:")
     for pkg in packages:
         print(pkg)
@@ -93,17 +104,34 @@ def uninstall():
 
 
 @click.command()
-def restore():
+@click.argument("filename")
+def restore(filename):
     """put back packages marked packages in packages.txt"""
 
-    packages = get_packages_from_file("packages.txt")
-    print("Installing packages:")
+    packages = get_package_list(filename)
+    print("Restoring packages:")
     for pkg in packages:
         print(pkg)
 
     if click.confirm("Are you sure?"):
         for pkg in packages:
             restore_pkg(pkg)
+
+
+@click.command()
+@click.argument("filename")
+def make_list(filename):
+    """create a list of packages from commented out lines in packages.txt"""
+
+    log.info("Saving packages to " + filename)
+
+    packages = get_marked_packages()
+    log.info("Adding %i packages" % len(packages))
+
+    with open(filename, "a", encoding="utf-8") as fid:
+        for pkg in packages:
+            fid.write(pkg + "\n")
+            log.info(pkg)
 
 
 @click.group()
@@ -114,6 +142,7 @@ def cli():
 cli.add_command(get_packages)
 cli.add_command(uninstall)
 cli.add_command(restore)
+cli.add_command(make_list)
 
 
 if __name__ == "__main__":

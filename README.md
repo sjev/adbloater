@@ -21,6 +21,7 @@ The  general process of removing bloatware is described [here](https://www.droid
 
 1. save installed packages `adbloater list --save` . The list will be saved to `packages.txt`
 2. comment out packages you want to remove by adding `#` at the beginning of the line
+3. create list to manage `adbloater make-list bloat.txt`
 3. bulk remove packages with `adbloater uninstall`
 4. (optional) Some packages can be restored after removal with `adbloater restore`
 
