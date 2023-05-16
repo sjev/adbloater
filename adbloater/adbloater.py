@@ -1,7 +1,6 @@
 """Console script for adbloater."""
 
 import os
-import sys
 import click
 
 import logging
@@ -38,7 +37,7 @@ def shell_cmd(cmd):
     """run shell command, echo to screen"""
 
     print(bcolors.OKCYAN + ">" + cmd + bcolors.ENDC)
-    log.info(">" + cmd)
+    log.info(f">{cmd}")
     if not DISABLE_CMD:
         os.system(cmd)
 
@@ -123,10 +122,10 @@ def restore(filename):
 def make_list(filename):
     """create a list of packages from commented out lines in packages.txt"""
 
-    log.info("Saving packages to " + filename)
+    log.info(f"Saving packages to {filename}")
 
     packages = get_marked_packages()
-    log.info("Adding %i packages" % len(packages))
+    log.info(f"Adding {len(packages)} packages")
 
     with open(filename, "a", encoding="utf-8") as fid:
         for pkg in packages:
